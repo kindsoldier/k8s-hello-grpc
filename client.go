@@ -60,8 +60,10 @@ func install() error {
 
 func main() {
 	log.Println("start client")
-	err := install()
-	if err != nil {
-		fmt.Println("client error:", err)
+	for {
+		err := install()
+		if err != nil {
+			fmt.Println("client error:", err)
+		}
 	}
 }

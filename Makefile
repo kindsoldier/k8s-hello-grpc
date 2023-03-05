@@ -1,5 +1,6 @@
 
 
+
 KUBECTL = k3s kubectl
 CTR = k3s ctr
 DOCKER = podman
@@ -8,6 +9,11 @@ GENDIR=.
 
 
 all: build-server build-client
+
+
+baseos: 
+	$(DOCKER) image build -t localhost/baseos:v1 -f baseos.docker .
+
 
 install-go:
 	mkdir -p /usr/local/bin
@@ -84,14 +90,15 @@ make-descr:
 	helm template client charts/client/ > client.yaml
 	helm template server charts/server/ > server.yaml
 
-k3s-install:
+install-k3s:
 	curl -sfL https://get.k3s.io | sh
 
-k3s-install-wo:
+install-k3s-wo:
 	curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--no-deploy traefik" sh
 
-k3s-uninstall:
+uninstall-k3s:
 	k3s-uninstall.sh
+
 
 install-utils:
 	sudo apt-get update
@@ -107,3 +114,8 @@ clean: local-clean
 local-clean:
 	rm -f server client *~
 	rm -f *.tar
+
+
+clean-images:
+	podman system prune --all --force
+	podman rmi --all --force

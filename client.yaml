@@ -1,18 +1,10 @@
 ---
-# Source: client-chart/templates/namespace.yaml
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: xxxxxxxxxx
-  labels:
-    name: server
----
 # Source: client-chart/templates/pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
   name: client
-  namespace: xxxxxxxxxx
+  namespace: default
 spec:
   containers:
     - name: client
