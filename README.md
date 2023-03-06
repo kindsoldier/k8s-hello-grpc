@@ -3,12 +3,13 @@
 
 ### haproxy ingress
 
-````
+```
 helm repo add haproxytech https://haproxytech.github.io/helm-charts
 helm repo update
 helm search repo haproxy
 helm install haproxy haproxytech/kubernetes-ingress
 ```
+
 
 ### nginx-ingress
 
